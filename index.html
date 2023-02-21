@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Online Exam Website</title>
+	<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+	<!-- Admin section -->
+	<section id="admin">
+		<h2>Admin Section</h2>
+		<form>
+			<label for="quiz-title">Quiz Title:</label>
+			<input type="text" id="quiz-title">
+			<label for="quiz-questions">Quiz Questions:</label>
+			<textarea id="quiz-questions"></textarea>
+			<button type="submit">Add Quiz</button>
+		</form>
+		<h3>Ranking</h3>
+		<ul>
+			<li>John - 95%</li>
+			<li>Jane - 80%</li>
+			<li>Bob - 75%</li>
+		</ul>
+		<h3>Quizzes</h3>
+		<ul id="quizzes">
+			<li data-quiz="Quiz 1">Quiz 1 <button class="remove-quiz">Remove</button></li>
+			<li data-quiz="Quiz 2">Quiz 2 <button class="remove-quiz">Remove</button></li>
+			<li data-quiz="Quiz 3">Quiz 3 <button class="remove-quiz">Remove</button></li>
+		</ul>
+	</section>
+
+	<!-- User section -->
+	<section id="user">
+		<h2>User Section</h2>
+		<ul id="quiz-list">
+			<li><a href="#" data-quiz="Quiz 1">Quiz 1</a></li>
+			<li><a href="#" data-quiz="Quiz 2">Quiz 2</a></li>
+			<li><a href="#" data-quiz="Quiz 3">Quiz 3</a></li>
+		</ul>
+		<div id="quiz-form" style="display: none;">
+			<form>
+				<h3 id="quiz-title"></h3>
+				<div id="quiz-questions"></div>
+				<button type="submit">Submit</button>
+			</form>
+		</div>
+		<h3>Ranking</h3>
+		<ul>
+			<li>John - 95%</li>
+			<li>Jane - 80%</li>
+			<li>Bob - 75%</li>
+		</ul>
+	</section>
+
+	<script>
+		// Get references to elements
+		var quizList = document.getElementById('quiz-list');
+		var quizForm = document.getElementById('quiz-form');
+		var quizTitle = document.getElementById('quiz-title');
+		var quizQuestions = document.getElementById('quiz-questions');
+		var quizzes = document.getElementById('quizzes');
+
+		// When a quiz link is clicked, show the form with that quiz
+		quizList.addEventListener('click', function(e) {
+			e.preventDefault();
+			var quizName = e.target.dataset.quiz;
+			var quiz = quizzes.querySelector('[data-quiz="' + quizName + '"]');
+			if (quiz) {
+				quizTitle.innerHTML = quizName;
+				quizQuestions.innerHTML = quiz.dataset.questions;
+				quizForm.style.display = 'block';
+			}
+		});
+
+		// When the form is submitted, show the user's results
+		quizForm.addEventListener('submit', function(e) {
+			e.preventDefault();
+			alert('Your results!');
+		});
+	</script>
+</body>
+</html>
